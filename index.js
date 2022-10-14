@@ -22,6 +22,7 @@ db.once('open', () => console.log('database connected'))
 app.use(cors())
 app.use(express.json())
 
+
 app.get('/tasks', (_req, res) => {
   Task.find({})
     .exec((err, tasks)=>{
@@ -35,17 +36,20 @@ app.get('/tasks', (_req, res) => {
 });
 
 app.post('/tasks', (req, res) => {
-  
-  // Task.find({})
-  //   .exec((err, tasks)=>{
-  //     if(err){
-  //       console.log(err)
-  //     }else{
-  //       res.send(tasks);
-  //     }
-  //   })
-  // res.send(JSON.stringify(notes));
+    let task = new Task({
+      description: req.body.data,
+      urgency: 0
+    })
+   task.save((err, task)=>{
+    if(err){
+      console.log(err)
+      res.sendStatus(400)
+    }else
+    console.log(`task saved successfully: ${task}`)
+    res.sendStatus(200)
+   })
 });
+
 
 app.listen(PORT, () => console.log(`listening on ${PORT} port`));
 
