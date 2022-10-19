@@ -5,6 +5,7 @@ const app = express()
 const PORT = 3000;
 const mongoose = require('mongoose')
 const Task = require('./models/tasks.js');
+const Goal = require('./models/goals.js');
 
 /**
  * Connect to MongoDB
@@ -22,7 +23,6 @@ db.once('open', () => console.log('database connected'))
 app.use(cors())
 app.use(express.json())
 
-
 app.get('/tasks', (_req, res) => {
   Task.find({})
     .exec((err, tasks)=>{
@@ -32,7 +32,6 @@ app.get('/tasks', (_req, res) => {
         res.send(tasks);
       }
     })
-  
 });
 
 app.post('/tasks', (req, res) => {
@@ -49,6 +48,34 @@ app.post('/tasks', (req, res) => {
     res.sendStatus(200)
    })
 });
+
+app.get('/goals', (req, res)=>{
+  console.log('done')
+  Goal.find({})
+    .exec((err, goals)=>{
+      if(err){
+        console.log(err)
+      }else{
+        res.send(goals);
+      }
+    })
+})
+
+app.post('/goals', (req, res)=>{
+  console.log({request: req.body.data})
+  let goal = new Goal({
+      description: req.body.data,
+      done: false
+    })
+    goal.save((err, goal)=>{
+    if(err){
+      console.log(err)
+      res.sendStatus(400)
+    }else
+    console.log(`goal saved successfully: ${goal}`)
+    res.sendStatus(200)
+   }) 
+})
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT} port`));
