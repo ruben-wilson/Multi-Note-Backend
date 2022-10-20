@@ -49,8 +49,19 @@ app.post('/tasks', (req, res) => {
    })
 });
 
+app.delete('/tasks', (req, res) => {
+  Task.findOneAndRemove({description: req.body.data})
+    .exec((err, task) => {
+      if(err){
+        console.log(err)
+      }else{
+        console.log(task)
+        res.send(task)
+      }
+    })
+})
+
 app.get('/goals', (req, res)=>{
-  console.log('done')
   Goal.find({})
     .exec((err, goals)=>{
       if(err){
@@ -75,6 +86,20 @@ app.post('/goals', (req, res)=>{
     console.log(`goal saved successfully: ${goal}`)
     res.sendStatus(200)
    }) 
+})
+
+app.delete('/goals', (req, res) => {
+  console.log('here')
+  console.log(req.body.data)
+  Goal.findOneAndRemove({description: req.body.data})
+    .exec((err, task) => {
+      if(err){
+        console.log(err)
+      }else{
+        console.log(task)
+        res.send(task)
+      }
+    })
 })
 
 
