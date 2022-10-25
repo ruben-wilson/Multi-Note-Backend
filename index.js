@@ -35,8 +35,11 @@ app.get('/tasks', (_req, res) => {
 });
 
 app.post('/tasks', (req, res) => {
+    console.log(req.body)
     let task = new Task({
-      description: req.body.data,
+      description: req.body.description,
+      date: req.body.date,
+      time: req.body.time,
       urgency: 0
     })
    task.save((err, task)=>{

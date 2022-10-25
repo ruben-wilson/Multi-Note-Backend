@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
   description: String,
-  urgency: Number,
+  date: String,
+  time: String,
+  urgency: Number
 })
 
 const tasks = mongoose.model('tasks', taskSchema);
