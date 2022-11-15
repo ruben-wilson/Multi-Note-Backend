@@ -14,7 +14,7 @@ const tasks = require("./models/tasks.js");
 /**
  * Connect to MongoDB
  **/
-mongoose.connect("mongodb://0.0.0.0/Tasks", {
+mongoose.connect("mongodb://localhost:27017/Tasks", {
 	useNewUrlParser: true,
 	// useUnifiedTopology: true,
 }); 
