@@ -1,8 +1,7 @@
-require("dotenv").config()
+const dotEnv = require('dotenv')
 const express = require("express")
 const cors = require('cors')
 const app = express()
-const PORT = 3000;
 const mongoose = require('mongoose')
 
 const Default = require('./models/defaults.js')
@@ -11,10 +10,12 @@ const tasksRouter = require('./routes/tasksRoute.js')
 const goalsRouter = require('./routes/goalsRoute.js');
 const tasks = require("./models/tasks.js");
 
+dotEnv.config()
+
 /**
  * Connect to MongoDB
  **/
-mongoose.connect("mongodb://0.0.0.0/Tasks", {
+mongoose.connect(process.env.DB_CONNECTION, {
 	useNewUrlParser: true,
 	// useUnifiedTopology: true,
 }); 
@@ -74,5 +75,6 @@ app.delete('/defaults', (req, res) => {
   
 })
 
+const PORT = process.env.port || 3000;
 app.listen(PORT, () => console.log(`listening on ${PORT} port`));
 
