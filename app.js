@@ -28,7 +28,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.status(2000).send('api-running')
+  res.status(200).send('api-running')
 })
 
 app.use('/tasks', tasksRouter)
