@@ -2,7 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const cors = require('cors')
 const app = express()
-const PORT = 3000;
+const PORT = 8000;
 const mongoose = require('mongoose')
 
 const Default = require('./models/defaults.js')
@@ -14,7 +14,7 @@ const tasks = require("./models/tasks.js");
 /**
  * Connect to MongoDB
  **/
-mongoose.connect("mongodb://0.0.0.0/Tasks", {
+mongoose.connect("mongodb://127.0.0.1:27017/Tasks", {
 	useNewUrlParser: true,
 	// useUnifiedTopology: true,
 }); 
