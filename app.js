@@ -2,6 +2,8 @@ const dotEnv = require('dotenv')
 const express = require("express")
 const cors = require('cors')
 const app = express()
+
+
 const mongoose = require('mongoose')
 
 const Default = require('./models/defaults.js')
@@ -15,6 +17,7 @@ dotEnv.config()
 /**
  * Connect to MongoDB
  **/
+
 mongoose.connect(process.env.DB_CONNECTION, {
 	useNewUrlParser: true,
 	// useUnifiedTopology: true,
@@ -81,4 +84,3 @@ app.delete('/defaults', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`listening on ${PORT} port`));
-
